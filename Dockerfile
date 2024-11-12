@@ -21,7 +21,7 @@ FROM scratch
 
 WORKDIR /notapp
 
-ENV SUPER_SECRET=123password
+ENV SUPER_SECRET=evnrionmentS3cr3tBu1ld
 COPY super.secret /notapp/
 
 # Copy the binary from the build stage

@@ -27,14 +27,24 @@ func checkAndCreateSecret() error {
 		return nil
 	}
 	if !os.IsNotExist(err) {
-		// Some other error occurred
+		// something bad happened
 		return err
 	}
 
-	// File doesn't exist, create it with content
-	err = os.WriteFile("runtime.secret", []byte("I wrote this during running! t0P s3cret1!11 "), 0644)
+	hostname, err := os.Hostname()
 	if err != nil {
-		return err
+		return fmt.Errorf("failed to get hostname: %v", err)
+	}
+
+	// time and
+	currentTime := time.Now().Format(time.RFC3339)
+	content := fmt.Sprintf("I wrote this during running\nTime: %s\nHostname: %s\n",
+		currentTime,
+		hostname)
+
+	err = os.WriteFile("runtime.secret", []byte(content), 0644)
+	if err != nil {
+		return fmt.Errorf("failed to write file: %v", err)
 	}
 	return nil
 }

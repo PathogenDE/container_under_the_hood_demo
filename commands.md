@@ -10,7 +10,7 @@
 
 # running container and exploring it
 
-docker run --name pidteller_container -e SECRET=env1r0mentS3cret! pidteller
+docker run --name pidteller_container -e SECRET=env1r0mentS3cretrun! pidteller
 
 ## Finding Pid of the container
 
@@ -42,21 +42,6 @@ sudo unshare --pid --fork --mount-proc ./main
 
 
 # kill
-pgrep -f unshare
 kill <id>
 
 
-# Docker
-
-docker run --name nsenter nsenter_demo
-
-/var/lib/docker/overlay2
-
- docker inspect nsenter | grep MergedDir
-
- .../merged
-
-
- touch iwashere
-
- 
