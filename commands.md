@@ -8,6 +8,30 @@
  pstree -p
 
 
+# running container and exploring it
+
+docker run --name pidteller_container -e SECRET=env1r0mentS3cret! pidteller
+
+## Finding Pid of the container
+
+docker inspect pidteller_container | grep Pid
+
+## Finding secrets (env)
+
+docker inspect pidteller_container | grep SECRET
+
+
+## Finding the fs (overlay2)
+
+docker inspect pidteller_container | grep MergedDir
+
+
+
+# Finding clone3 using strace 
+
+strace -f -e clone3 docker run --name clone3finder alpine echo "I started" && sleep 5 && echo " -- I finished --"
+
+
  # unshare
 sudo unshare --pid --fork --mount-proc ./main
 
