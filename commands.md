@@ -45,3 +45,14 @@ sudo unshare --pid --fork --mount-proc ./main
 kill <id>
 
 
+
+# Docker doesn't use user namespaces by default
+
+docker run --name=usernsdemo ubuntu sleep infinity
+docker inspect usernsdemo | grep Pid
+ps aux | grep <123> # look at the user!
+docker inspect usernsdemo | grep Pid
+cat /proc/<123>/uid_map   # `0` <- container user `0` <- host user `124821512521` <- range
+
+Look into `https://docs.docker.com/engine/security/userns-remap/`
+
