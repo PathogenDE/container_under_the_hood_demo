@@ -32,17 +32,17 @@ docker inspect pidteller_container | grep MergedDir
 strace -f -e clone3 docker run --name clone3finder alpine echo "I started" && sleep 5 && echo " -- I finished --"
 
 
- # unshare
+ # Do a "manual" container with unshare
 sudo unshare --pid --fork --mount-proc ./main
 
 
- # Nsenter
+ ## Nsenter into our unshare
  pgrep main
  sudo nsenter -t <PID> -p -m -u /bin/bash
 
 
-# kill
-kill <id>
+## kill
+sudo kill <id>
 
 
 
